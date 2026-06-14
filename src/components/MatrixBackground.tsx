@@ -42,8 +42,19 @@ export default function MatrixBackground() {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) { mouse.x = t.clientX; mouse.y = t.clientY; }
+    };
+    const onTouchEnd = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
     window.addEventListener("resize", onResize);
     window.addEventListener("mousemove", onMouse);
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
 
     ctx.font = `${fontSize}px monospace`;
 
@@ -95,6 +106,9 @@ export default function MatrixBackground() {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 
