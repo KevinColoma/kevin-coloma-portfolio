@@ -131,13 +131,13 @@ export default function Hero() {
               >
                 <LinkedinIcon width={22} height={22} />
               </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="p-3 text-text-muted hover:text-white hover:bg-white/5 rounded-xl transition-all"
-                aria-label="Email"
-              >
-                <Mail size={22} />
-              </a>
+          <a
+            href={`mailto:${personalInfo.email}?subject=Contacto%20desde%20portfolio&body=Hola%20Kevin%2C%20me%20gustar%C3%ADa%20contactarte%20para...`}
+            className="p-3 text-text-muted hover:text-white hover:bg-white/5 rounded-xl transition-all"
+            aria-label="Email"
+          >
+            <Mail size={22} />
+          </a>
             </motion.div>
           )}
         </AnimatePresence>
