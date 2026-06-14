@@ -20,6 +20,19 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surface to-transparent pointer-events-none" />
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6"
+        >
+          <img
+            src="/foto-perfil.jpg"
+            alt="Kevin Coloma"
+            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-accent/30 shadow-lg shadow-accent/10 mx-auto"
+          />
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -65,9 +65,16 @@ export default function About() {
 
             <div className="space-y-6">
               <div className="p-6 rounded-xl bg-surface-light/50 border border-white/5">
-                <h3 className="text-white font-semibold mb-4 text-lg">
-                  Información personal
-                </h3>
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src="/foto-perfil.jpg"
+                    alt="Kevin Coloma"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-accent/30"
+                  />
+                  <h3 className="text-white font-semibold text-lg">
+                    Información personal
+                  </h3>
+                </div>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-text-muted">Nombre</span>
