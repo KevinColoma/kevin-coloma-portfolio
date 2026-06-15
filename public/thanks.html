@@ -16,13 +16,25 @@
       min-height: 100vh;
       text-align: center;
       padding: 2rem;
+      overflow: hidden;
+    }
+    #matrix-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
     .card {
+      position: relative;
+      z-index: 1;
       max-width: 480px;
       padding: 3rem 2rem;
       border-radius: 1rem;
       border: 1px solid rgba(255,255,255,0.05);
       background: rgba(30, 41, 59, 0.3);
+      backdrop-filter: blur(4px);
     }
     .icon { font-size: 4rem; margin-bottom: 1rem; }
     h1 { font-size: 1.5rem; margin-bottom: 0.75rem; color: #60a5fa; }
@@ -41,11 +53,108 @@
   </style>
 </head>
 <body>
+  <canvas id="matrix-canvas"></canvas>
   <div class="card">
     <div class="icon">&#10003;</div>
     <h1>Mensaje enviado</h1>
     <p>Gracias por contactarme. Te responderé lo antes posible ✨.</p>
     <a href="/">Volver al inicio</a>
   </div>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById("matrix-canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const mouse = { x: -9999, y: -9999 };
+      const fontSize = 16;
+      const charSet = "01アイウエオカキクケコサシスセソタチツテト0123456789";
+      const cols = Math.floor(window.innerWidth / (fontSize - 8));
+      const drops = [];
+
+      for (let i = 0; i < cols; i++) {
+        const count = 1 + Math.floor(Math.random() * 2);
+        const colDrops = [];
+        for (let j = 0; j < count; j++) {
+          colDrops.push({
+            y: Math.random() * canvas.height / fontSize,
+            speed: 0.03 + Math.random() * 0.06,
+            char: charSet[Math.floor(Math.random() * charSet.length)],
+            changeTimer: 0,
+          });
+        }
+        drops.push(colDrops);
+      }
+
+      const onResize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      const onMouse = (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      };
+      const onTouch = (e) => {
+        const t = e.touches[0];
+        if (t) { mouse.x = t.clientX; mouse.y = t.clientY; }
+      };
+      const onTouchEnd = () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      };
+      window.addEventListener("resize", onResize);
+      window.addEventListener("mousemove", onMouse);
+      window.addEventListener("touchmove", onTouch, { passive: true });
+      window.addEventListener("touchstart", onTouch, { passive: true });
+      window.addEventListener("touchend", onTouchEnd);
+
+      ctx.font = fontSize + "px monospace";
+
+      function draw() {
+        ctx.fillStyle = "rgba(15, 23, 42, 0.15)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < drops.length; i++) {
+          const x = i * (fontSize - 8);
+
+          for (let d = 0; d < drops[i].length; d++) {
+            const drop = drops[i][d];
+            drop.y += drop.speed;
+            const y = drop.y * fontSize;
+
+            if (y > canvas.height + fontSize) {
+              drop.y = -(Math.random() * 10);
+              drop.speed = 0.03 + Math.random() * 0.06;
+              continue;
+            }
+            if (y < -fontSize) continue;
+
+            drop.changeTimer++;
+            if (drop.changeTimer > 30 + Math.floor(Math.random() * 30)) {
+              drop.char = charSet[Math.floor(Math.random() * charSet.length)];
+              drop.changeTimer = 0;
+            }
+
+            const dx = mouse.x - x;
+            const dy = mouse.y - y;
+            const near = Math.sqrt(dx * dx + dy * dy) < 120;
+
+            const baseAlpha = 0.04 + Math.random() * 0.06;
+            const alpha = near ? Math.min(0.4, baseAlpha + 0.3) : baseAlpha;
+            const rgb = near ? "255,255,255" : "168,216,234";
+
+            ctx.fillStyle = "rgba(" + rgb + ", " + alpha + ")";
+            ctx.fillText(drop.char, x, y);
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 </body>
 </html>
