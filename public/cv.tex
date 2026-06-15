@@ -1,0 +1,123 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[left = 0mm, right = 0mm, top = 0mm, bottom = 0mm]{geometry}
+\usepackage[stretch = 25, shrink = 25, tracking=true, letterspace=30]{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{marvosym}
+\usepackage{enumitem}
+
+\setlength{\topskip}{0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\fboxsep}{0pt}
+\pagestyle{empty}
+\raggedbottom
+
+\setlist{parsep = 0pt, topsep = 0pt, partopsep = 1pt, itemsep = 1pt, leftmargin = 6mm}
+\usepackage{FiraSans}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{cvblue}{HTML}{304263}
+
+\newcommand{\dates}[1]{\hfill\mbox{\textbf{#1}}}
+\newcommand{\is}{\par\vskip.5ex plus .4ex}
+\newcommand{\smaller}[1]{{\small$\diamond$\ #1}}
+\newcommand{\headleft}[1]{\vspace*{3ex}\textsc{\textbf{#1}}\par%
+    \vspace*{-1.5ex}\hrulefill\par\vspace*{0.7ex}}
+\newcommand{\headright}[1]{\vspace*{2.5ex}\textsc{\Large\color{cvblue}#1}\par%
+     \vspace*{-2ex}{\color{cvblue}\hrulefill}\par}
+
+\usepackage[colorlinks = true, urlcolor = white, linkcolor = white]{hyperref}
+
+\begin{document}
+
+\begin{minipage}[t]{0.33\textwidth}
+\colorbox{cvblue}{\begin{minipage}[t][5mm][t]{\textwidth}\null\hfill\null\end{minipage}}
+
+\vspace{-.2ex}
+\colorbox{cvblue!90}{\color{white}
+\kern0.09\textwidth
+\begin{minipage}[t][293mm][t]{0.82\textwidth}
+\raggedright
+\vspace*{2.5ex}
+
+\Large Kevin Bladimir \textbf{\textsc{Coloma Erazo}} \normalsize
+
+\null\hfill\includegraphics[width=0.65\textwidth]{carnet.png}\hfill\null
+
+\headleft{Contacto}
+\small
+\MVAt\ kcoloma89@gmail.com \\
+\Mobilefone\ +593 961216222 \\
+\Mundus\ \href{https://github.com/KevinColoma}{github.com/KevinColoma} \\
+\Mundus\ \href{http://www.linkedin.com/in/kevin-bladimir}{linkedin.com/in/kevin-bladimir} \\
+\Letter\ Quito, Ecuador
+\normalsize
+
+\headleft{Habilidades}
+\begin{itemize}
+\item \textbf{Programación:} Java (Spring Boot), JavaScript/TypeScript (Node.js, Angular, React)
+\item \textbf{Bases de Datos \& Data:} Oracle 19c, PostgreSQL, MongoDB, MinIO
+\item \textbf{Ciberseguridad:} OAuth2, JWT, WSO2, criptografía, auditoría y seguridad
+\item \textbf{DevOps \& Automatización:} Git/GitLab, Docker, Jenkins, Kubernetes, ArgoCD, n8n
+\item \textbf{Herramientas:} Excel avanzado, APIs REST
+\end{itemize}
+
+\headleft{Idiomas}
+Español (Nativo) \\
+Inglés (B2)
+
+\end{minipage}
+\kern0.09\textwidth
+}
+\end{minipage}
+\hskip2.5em
+\begin{minipage}[t]{0.56\textwidth}
+
+\headright{Perfil profesional}
+Estudiante de último semestre de Ingeniería en Software con sólida base en desarrollo tecnológico full-stack, automatización de procesos, gestión de datos y ciberseguridad.
+
+Experiencia práctica en el diseño y documentación de soluciones empresariales, consumo e integración de APIs, y despliegue automatizado. Capacidad analítica y técnica para la arquitectura de software seguro, control de accesos, auditoría de datos y trabajo colaborativo orientado a objetivos organizacionales bajo metodologías ágiles y DevOps.
+
+\headright{Experiencia}
+
+\textsc{Desarrollador (Pasante)} \textit{ESPE -- GAD Sigchos} \dates{Dic 2025 -- Mar 2026} \\
+\smaller{Participación en el diseño, desarrollo y documentación de soluciones tecnológicas web. Integración de APIs REST y optimización de componentes lógicos y usabilidad. Colaboración en el análisis de requerimientos con usuarios internos.}
+
+\is
+\textsc{Asistente de Automatización (Trainee)} \textit{Ai Connect Solutions} \dates{Oct 2025 -- Ene 2026} \\
+\smaller{Apoyo en el desarrollo de flujos de automatización e integración de entornos digitales (Telegram, CRM, Google Sheets). Manejo de datos estructurados e implementación de herramientas basadas en IA para la optimización de procesos.}
+
+\headright{Proyectos Relevantes}
+
+\textsc{Sistema de Gestión de Acuerdos (UTICs -- ESPE)} \\
+\smaller{Desarrollo full-stack de una aplicación para la gestión y flujo de revisión de acuerdos institucionales. Implementación de backend seguro en Spring Boot 3 con autenticación OAuth2/WSO2 y base de datos Oracle 19c. Frontend modular en Angular 17 con componentes analíticos de visualización (Chart.js).} \\
+\smaller{Diseño de snapshots inmutables para trazabilidad de auditoría, almacenamiento en MinIO y despliegue automatizado mediante pipelines CI/CD con Jenkins, Kubernetes, GitOps y ArgoCD.}
+
+\headright{Educación}
+
+\textsc{Ingeniería en Software} \textit{Universidad de las Fuerzas Armadas ESPE} \dates{Último semestre en curso} \\
+
+\is
+\textsc{Inglés B2} \textit{South American Language Center} \dates{2019 -- 2022}
+
+\headright{Cursos y Certificaciones}
+
+\textsc{Ciberseguridad y Gestión de Riesgos} \textit{Academia Profe Sang} \dates{2026} \\
+\smaller{Fundamentos de seguridad, criptografía, análisis de vulnerabilidades y auditoría.}
+
+\is
+\textsc{Industria 4.0} \\
+\smaller{Transformación digital, automatización de procesos y tecnologías emergentes.}
+
+\headright{Habilidades Profesionales}
+
+Capacidad de ejecución, comunicación asertiva, rendición de cuentas (accountability), adaptabilidad al cambio, pensamiento crítico y gestión de tiempos.
+
+\end{minipage}
+
+\end{document}

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ArrowDown, Mail } from "lucide-react";
+import { useState, useCallback } from "react";
+import { ArrowDown, Mail, Download } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "../data/portfolio";
@@ -10,6 +10,38 @@ export default function Hero() {
   const [startTitle, setStartTitle] = useState(false);
   const [startTagline, setStartTagline] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
+  const downloadCV = useCallback(async () => {
+    setDownloading(true);
+    try {
+      // Intentar descargar el PDF compilado
+      const res = await fetch("/cv.pdf");
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Kevin_Coloma_CV.pdf";
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        // Fallback: descargar el .tex
+        const texRes = await fetch("/cv.tex");
+        const texBlob = await texRes.blob();
+        const url = URL.createObjectURL(texBlob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Kevin_Coloma_CV.tex";
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch {
+      // Último fallback: abrir el .tex en nueva pestaña
+      window.open("/cv.tex", "_blank");
+    }
+    setDownloading(false);
+  }, []);
 
   return (
     <section
@@ -114,6 +146,14 @@ export default function Hero() {
               >
                 Ver proyectos
               </a>
+              <button
+                onClick={downloadCV}
+                disabled={downloading}
+                className="px-6 py-3 border border-accent/30 text-accent rounded-xl font-medium hover:bg-accent/10 hover:border-accent/60 transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2"
+              >
+                <Download size={18} />
+                {downloading ? "Descargando..." : "Descargar CV"}
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
