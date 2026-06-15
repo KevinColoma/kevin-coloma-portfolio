@@ -14,31 +14,41 @@ export default function Hero() {
 
   const downloadCV = useCallback(async () => {
     setDownloading(true);
+    const GITHUB_PDF =
+      "https://raw.githubusercontent.com/KevinColoma/kevin-coloma-portfolio/master/public/cv.pdf";
+
+    const download = (url: string, filename: string) => {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+    };
+
+    const fetchAndDownload = async (url: string, filename: string) => {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Not found");
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      download(objectUrl, filename);
+      URL.revokeObjectURL(objectUrl);
+    };
+
     try {
-      // Intentar descargar el PDF compilado
-      const res = await fetch("/cv.pdf");
-      if (res.ok) {
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Kevin_Coloma_CV.pdf";
-        a.click();
-        URL.revokeObjectURL(url);
-      } else {
-        // Fallback: descargar el .tex
-        const texRes = await fetch("/cv.tex");
-        const texBlob = await texRes.blob();
-        const url = URL.createObjectURL(texBlob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Kevin_Coloma_CV.tex";
-        a.click();
-        URL.revokeObjectURL(url);
-      }
+      // 1° intento: PDF local (Netlify)
+      await fetchAndDownload("/cv.pdf", "Kevin_Coloma_CV.pdf");
     } catch {
-      // Último fallback: abrir el .tex en nueva pestaña
-      window.open("/cv.tex", "_blank");
+      try {
+        // 2° intento: PDF desde GitHub raw
+        await fetchAndDownload(GITHUB_PDF, "Kevin_Coloma_CV.pdf");
+      } catch {
+        try {
+          // 3° intento: descargar .tex
+          await fetchAndDownload("/cv.tex", "Kevin_Coloma_CV.tex");
+        } catch {
+          // Último recurso: abrir .tex en nueva pestaña
+          window.open("/cv.tex", "_blank");
+        }
+      }
     }
     setDownloading(false);
   }, []);
