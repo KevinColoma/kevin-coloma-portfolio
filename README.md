@@ -6,6 +6,9 @@
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer&logoColor=white)](https://www.framer.com/motion)
+[![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)](https://kevinblad-portfolio.netlify.app)
+
+**🌐 URL:** [kevinblad-portfolio.netlify.app](https://kevinblad-portfolio.netlify.app)
 
 Portfolio profesional interactivo de **Kevin Coloma** — Estudiante de último semestre de Ingeniería en Software y Full Stack Developer. Este sitio web personal muestra mi perfil, experiencia, proyectos, habilidades técnicas y formas de contacto en una interfaz moderna, responsiva y animada.
 
@@ -15,23 +18,24 @@ Portfolio profesional interactivo de **Kevin Coloma** — Estudiante de último 
 
 | Sección | Descripción |
 |---|---|
-| **Hero animado** | Presentación con partículas interactivas en Canvas, animaciones de entrada con Framer Motion y enlaces a redes sociales. |
-| **Sobre mí** | Resumen profesional, tarjetas de áreas clave (Full Stack, Seguridad, DevOps, Datos), datos personales e idiomas. |
+| **Hero animado** | Foto de perfil, name typewriter, Matrix rain de fondo interactivo con el mouse/touch. |
+| **Sobre mí** | Resumen profesional, tarjetas de áreas clave (Full Stack, Seguridad, DevOps, Datos), datos personales e idiomas con barras de progreso. |
 | **Experiencia** | Línea de tiempo con las experiencias laborales más relevantes. |
 | **Proyectos** | Proyecto destacado con descripción, características principales y stack tecnológico. |
 | **Habilidades** | Grid de habilidades técnicas organizadas por categorías (Frontend, Backend, Bases de Datos, DevOps, Seguridad, Herramientas) más habilidades profesionales. |
 | **Educación** | Formación académica y certificaciones profesionales. |
-| **Contacto** | Información de contacto, enlaces a redes sociales y formulario funcional (integrado con FormSubmit). |
+| **Contacto** | Información de contacto, enlaces a redes sociales y formulario funcional con captcha (integrado con FormSubmit). |
 | **Navegación** | Navbar fijo con efecto blur al hacer scroll, menú responsive para móviles con animación de entrada. |
 | **Footer** | Pie de página con derechos reservados y créditos. |
 
 ### Animaciones y efectos
 
-- **Fondo de partículas** animado con Canvas API (conexiones entre partículas cercanas).
+- **Matrix rain global** con Canvas API — caracteres katakana y binarios en tonos pastel blue, caída lenta, interactivo con mouse y touch (se iluminan al pasar el cursor/dedo).
+- **Typewriter text** con cursor parpadeante en el Hero y títulos de sección.
 - **Animaciones por scroll** con Intersection Observer — los elementos aparecen suavemente al entrar en pantalla.
-- **Transiciones** con Framer Motion (stagger, fade, slide).
+- **Transiciones** con Framer Motion (stagger, fade, slide, scale).
 - **Responsive design** con Tailwind CSS, adaptable a móviles, tablets y escritorio.
-- **Modo oscuro** nativo con paleta de colores inspirada en azul profundo y acentos celestes.
+- **Paleta oscura** con tonos azul profundo y acentos celestes.
 
 ---
 
@@ -45,9 +49,11 @@ Portfolio profesional interactivo de **Kevin Coloma** — Estudiante de último 
 | [Tailwind CSS 4](https://tailwindcss.com) | Framework de estilos utilitario |
 | [Framer Motion 12](https://www.framer.com/motion) | Librería de animaciones para React |
 | [Lucide React](https://lucide.dev) | Iconos SVG open source |
-| [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) | Renderizado del fondo de partículas |
+| [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) | Matrix rain interactivo de fondo |
 | [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) | Detección de visibilidad para animaciones por scroll |
 | [Google Fonts](https://fonts.google.com) | Tipografías Inter y Fira Code |
+| [Netlify](https://www.netlify.com) | Hosting y despliegue continuo desde GitHub |
+| [FormSubmit](https://formsubmit.co) | Backend del formulario de contacto |
 
 ---
 
@@ -56,18 +62,22 @@ Portfolio profesional interactivo de **Kevin Coloma** — Estudiante de último 
 ```
 kevin-coloma-portfolio/
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg              # Favicon
+│   ├── foto-perfil.jpg          # Foto de perfil
+│   └── thanks.html              # Página post-envío de formulario
 ├── src/
-│   ├── assets/                  # Recursos estáticos
 │   ├── components/              # Componentes de React
+│   │   ├── MatrixBackground.tsx # Matrix rain global (Canvas)
 │   │   ├── Navbar.tsx           # Barra de navegación fija
-│   │   ├── Hero.tsx             # Sección hero con partículas
+│   │   ├── Hero.tsx             # Sección hero con typewriter
 │   │   ├── About.tsx            # Sección sobre mí
 │   │   ├── Experience.tsx       # Línea de tiempo de experiencia
 │   │   ├── Projects.tsx         # Proyectos destacados
 │   │   ├── Skills.tsx           # Habilidades técnicas y profesionales
 │   │   ├── Education.tsx        # Educación y certificaciones
 │   │   ├── Contact.tsx          # Contacto y formulario
+│   │   ├── SectionTitle.tsx     # Título de sección con typewriter
+│   │   ├── TypewriterText.tsx   # Componente de efecto máquina de escribir
 │   │   ├── Footer.tsx           # Pie de página
 │   │   └── icons.tsx            # Iconos SVG personalizados (GitHub, LinkedIn)
 │   ├── data/
@@ -139,37 +149,26 @@ npm run preview
 
 ---
 
-## 📸 Capturas de pantalla
-
-> *Próximamente — Aquí se incluirán capturas del sitio en desktop, tablet y móvil.*
-
-| Vista | Preview |
-|---|---|
-| **Hero** | ![](docs/screenshots/hero.png) |
-| **Proyectos** | ![](docs/screenshots/projects.png) |
-| **Contacto** | ![](docs/screenshots/contact.png) |
-| **Móvil** | ![](docs/screenshots/mobile.png) |
-
 ---
 
 ## 🌐 Despliegue
 
-El sitio está optimizado para ser desplegado en plataformas como:
+El sitio está desplegado en **Netlify** con despliegue automático desde GitHub.
 
-- **Vercel** — despliegue directo desde GitHub
-- **Netlify** — arrastrar la carpeta `dist/` o conectar el repositorio
-- **GitHub Pages** — usando `gh-pages` o GitHub Actions
-- **Cloudflare Pages** — conectando el repositorio
+**URL:** [kevinblad-portfolio.netlify.app](https://kevinblad-portfolio.netlify.app)
+
+Cada push a `master` dispara un nuevo deploy automático.
 
 ---
 
 ## 📬 Contacto
 
-- **Email:** [kcoloma89@gmail.com](mailto:kcoloma89@gmail.com)
+- **Email:** [kcoloma89@gmail.com](mailto:kcoloma89@gmail.com?subject=Contacto%20desde%20portfolio&body=Hola%20Kevin%2C%20me%20gustar%C3%ADa%20contactarte%20para...)
 - **Teléfono:** [+593 961216222](tel:+593961216222)
 - **LinkedIn:** [Kevin Bladimir Coloma Erazo](http://www.linkedin.com/in/kevin-bladimir)
 - **GitHub:** [@KevinColoma](https://github.com/KevinColoma)
 - **Ubicación:** Quito, Ecuador
+- **Web:** [kevinblad-portfolio.netlify.app](https://kevinblad-portfolio.netlify.app)
 
 ---
 
