@@ -128,6 +128,30 @@ export default function About() {
                   </div>
                 </div>
               </div>
+
+              <div className="p-6 rounded-xl bg-surface-light/50 border border-white/5">
+                <h3 className="text-white font-semibold mb-4 text-lg">
+                  LinkedIn
+                </h3>
+                <div className="flex justify-center [&_a]:!text-accent [&_.badge-base]:!bg-transparent">
+                  <div
+                    className="badge-base LI-profile-badge"
+                    data-locale="es_ES"
+                    data-size="medium"
+                    data-theme="dark"
+                    data-type="VERTICAL"
+                    data-vanity="kevin-bladimir"
+                    data-version="v1"
+                  >
+                    <a
+                      className="badge-base__link LI-simple-link"
+                      href="https://ec.linkedin.com/in/kevin-bladimir?trk=profile-badge"
+                    >
+                      Kevin Bladimir Coloma Erazo
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
